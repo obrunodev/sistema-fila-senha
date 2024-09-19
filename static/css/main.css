@@ -1,0 +1,9 @@
+.bg-nutri {
+    background-color: #F4EBD9;
+}
+
+.delete-img:hover {
+    background-color: red;
+    cursor: pointer;
+    padding: 5px;
+}
