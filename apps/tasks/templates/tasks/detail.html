@@ -1,0 +1,50 @@
+{% extends "layout/base.html" %}
+
+{% load i18n %}
+
+{% block title %}{{ task.name }}{% endblock title %}
+
+{% block content %}
+    {% include "partials/messages.html" %}
+
+    <div class="card mt-5">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <h1>{{ task.name }}</h1>
+                <a href="{% url 'tasks:update' task.id %}" class="btn btn-primary">
+                    {% trans "Edit" %}
+                    <i class="bi bi-pencil-square"></i>
+                </a>
+            </div>
+        </div>
+        <div class="card-body">
+            <p>{{ task.description|linebreaks|urlize|default:"-" }}</p>
+            {% if task.completed %}
+                <p>
+                    <strong>Status:</strong>
+                    <span class="badge bg-success">Completed</span></p>
+            {% else %}
+                <p>
+                    <strong>Status:</strong>
+                    <span class="badge bg-secondary">Not completed</span>
+                </p>
+            {% endif %}
+        </div>
+        <div class="card-footer">
+            <div class="d-flex justify-content-between align-items-center">
+                {% if not task.completed %}
+                    <form action="{% url 'tasks:finish' task.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-success">{% trans "Complete" %} <i class="bi bi-check-lg"></i></button>
+                    </form>
+                {% else %}
+                    <form action="{% url "tasks:unfinish" task.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-secondary">{% trans "Unfinish" %} <i class="bi bi-x-lg"></i></button>
+                    </form>
+                {% endif %}
+                <a href="{% url 'tasks:delete' task.id %}" class="btn btn-danger">{% trans "Delete" %} <i class="bi bi-trash"></i></a>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

@@ -2,18 +2,18 @@
 
 {% load i18n %}
 
-{% block title %}{% trans "My data" %}{% endblock title %}
+{% block title %}{% trans "Create Task" %}{% endblock title %}
 
 {% block content %}
 
     <div class="card mt-5">
         <div class="card-body">
-            <h1 class="h3">{% trans "My data" %}</h1>
-            
+            <h1 class="mb-3">{% trans "Create Task" %}</h1>
+        
             <form method="post">
                 {% csrf_token %}
                 {% include "partials/form.html" with form=form %}
-                <button type="submit" class="btn btn-primary mt-2">{% trans "Update" %}</button>
+                <input type="submit" class="btn btn-primary mt-2" value="{% trans "Create" %}">
             </form>
         </div>
     </div>

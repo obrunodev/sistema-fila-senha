@@ -1,12 +1,13 @@
+from django.contrib.messages import constants as messages
+from decouple import config
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-e$f78_szvkuyghlt8d_egxod6pdg)m5oi&&atqc&=ce%f3+1^-'
-
+SECRET_KEY = config('DJANGO_SECRET_KEY')
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'apps.users',
@@ -16,6 +17,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'apps.tasks',
 ]
 
 MIDDLEWARE = [
@@ -75,6 +77,19 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
+MESSAGE_TAGS = {messages.ERROR: 'danger'}
+
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [BASE_DIR / 'static']
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+LOGIN_REDIRECT_URL = 'index'
+LOGOUT_REDIRECT_URL = 'users:login'
+LOGIN_URL = 'users:login'
+LOGOUT_URL = 'users:logout'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'users.User'

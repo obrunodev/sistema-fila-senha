@@ -1,0 +1,42 @@
+{% extends "layout/base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Tasks" %}{% endblock title %}
+
+{% block content %}
+
+    <h1 class="my-3">{% trans "Tasks" %}</h1>
+
+    {% include "partials/messages.html" %}
+    
+    <a href="{% url 'tasks:create' %}" class="btn btn-primary mb-2">{% trans "Create Task" %}</a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">{% trans "Name" %}</th>
+                <th scope="col">{% trans "Description" %}</th>
+                <th scope="col">{% trans "Status" %}</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+                <tr>
+                    <td>{{ task.name }}</td>
+                    <td>{{ task.description }}</td>
+                    <td>
+                        {% if task.completed %}
+                            <span class="badge bg-success">{% trans "Completed" %}</span>
+                        {% else %}
+                            <span class="badge bg-secondary">{% trans "Not completed" %}</span>
+                        {% endif %}
+                    </td>
+                    <td><a href="{% url 'tasks:detail' task.id %}" class="btn btn-primary btn-sm">{% trans "View" %}</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock content %}
