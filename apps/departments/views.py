@@ -60,3 +60,9 @@ def manage_queue(request):
             )
             messages.success(request, f'Gerado senha {new_queue} para {new_queue.department}.')
         return redirect('departments:manage')
+
+
+def queue_screen(request, department_id):
+
+    if request.method == 'GET':
+        return render(request, 'departments/queue_screen.html')
