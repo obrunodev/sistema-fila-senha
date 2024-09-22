@@ -1,6 +1,6 @@
 {% load static %}
-<h1 class="text-center my-0 bg-nutri m-auto">
-    <img src="{% static "img/logo.png" %}" alt="Logo Jo Nutricionista">
+<h1 class="text-center my-0 m-auto">
+    <img src="{% static "img/logo_text.svg" %}" alt="Logo Jo Nutricionista">
 </h1>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container">
@@ -9,28 +9,14 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav m-auto">
-                {% if user.is_superuser %}
-                    <li class="nav-item">
-                        <a class="nav-link {% if section == 'patients' %}active{% endif %}" href="{% url "patients:list" %}">Pacientes</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {% if section == 'showroom' %}active{% endif %}" href="{% url "recipes:showroom" %}">Showroom</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {% if section == 'recipes' %}active{% endif %}" href="{% url "recipes:list" %}">Receitas</a>
-                    </li>
-                {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link {% if section == 'showroom' %}active{% endif %}" href="{% url "recipes:showroom" %}">Receitas</a>
-                    </li>
-                {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link {% if section == 'call' %}active{% endif %}" href="{% url "departments:call" %}">Call</a>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        {{ user.first_name }}
+                        {{ user.username }}
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="{% url "users:update" %}">Meus dados</a></li>
-                        <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="{% url "users:logout" %}">Sair</a></li>
                     </ul>
                 </li>

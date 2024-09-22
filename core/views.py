@@ -8,6 +8,6 @@ def index(request):
         return redirect('users:login')
 
     if user.is_superuser:
-        return redirect('tasks:list')
+        return redirect('departments:call')
     else:
-        return redirect('tasks:list')
+        return redirect('departments:call')

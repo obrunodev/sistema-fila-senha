@@ -1,0 +1,21 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Gerenciamento de senhas{% endblock title %}
+
+{% block content %}
+
+    <h1>Gerenciamento de senhas</h1>
+
+    {% include "partials/messages.html" %}
+
+    <p>Gerar senha para:</p>
+    <div class="d-flex">
+        {% for d in departments %}
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary me-2" name="d_id" value="{{ d.id }}">{{ d }}</button>
+            </form>
+        {% endfor %}
+    </div>
+
+{% endblock content %}

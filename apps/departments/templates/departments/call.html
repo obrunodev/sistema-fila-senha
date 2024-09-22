@@ -1,0 +1,29 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Call{% endblock title %}
+
+{% block content %}
+
+    {% include "partials/messages.html" %}
+
+    <h1>Central de chamados</h1>
+
+    <p>Último atendimento: {{ last_queue|default:"?" }}</p>
+
+    <p>Atendendo agora: {{ current_queue|default:"?" }}</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" name="_next_queue" class="btn btn-primary">
+            Chamar próxima senha
+        </button>
+    </form>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-warning" name="_call_again">
+            Chamar novamente
+        </button>
+    </form>
+
+{% endblock content %}
